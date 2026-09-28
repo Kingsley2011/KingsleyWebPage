@@ -9,7 +9,7 @@
            1. 顶级设计系统变量
            ========================================== */
         :root {
-
+            --dark-bg: #0B1120;
             --dark-surface: #1E293B;
             --accent-start: #38BDF8;   
             --accent-end: #818CF8;     
@@ -38,14 +38,14 @@
         }
 
         /* ==========================================
-           2. 动态微光占位图 
+           2. 动态微光占位图与真实图片样式 
            ========================================== */
         @keyframes shimmer {
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
         }
 
-        .img-placeholder {
+        .img-container {
             background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
             background-size: 1000px 100%;
             animation: shimmer 3s infinite linear;
@@ -53,8 +53,17 @@
             color: #94A3B8; font-size: 0.85rem; font-weight: 500;
             border-radius: var(--radius-md); overflow: hidden; width: 100%;
             border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
         }
-        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .img-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2; 
+        }
 
         /* ==========================================
            3. 顶级毛玻璃导航栏
@@ -140,7 +149,7 @@
            ========================================== */
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 17, 32, 0.4); /* 深色半透明遮罩 */
+            background: rgba(11, 17, 32, 0.4); 
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             z-index: 2000; display: flex; justify-content: center; align-items: center;
             opacity: 0; visibility: hidden; padding: 20px;
@@ -199,12 +208,18 @@
         <h2 class="section-title animate-up delay-2">My Story</h2>
         <div class="grid-layout animate-up delay-3">
             <div class="premium-card">
-                <div class="img-placeholder" style="min-height: 240px;">[ Photo: Beijing Roots ]</div>
+                <div class="img-container" style="min-height: 240px;">
+                    <!-- 已经更新：使用你刚刚上传的 Beijing.jpg -->
+                    <img src="Beijing.jpg" alt="Beijing Roots">
+                </div>
                 <h3>Roots in Beijing</h3>
                 <p>Growing up in Beijing shaped my perspective and gave me a unique cultural background that I proudly carry with me as my foundation.</p>
             </div>
+            
             <div class="premium-card">
-                <div class="img-placeholder" style="min-height: 240px; animation-delay: -1.5s;">[ Photo: St. George's ]</div>
+                <div class="img-container" style="min-height: 240px;">
+                    <img src="Bicycle and School.JPG" alt="School and Bicycle">
+                </div>
                 <h3>New Chapter</h3>
                 <p>As a new student at St. George's, I built this space to let my teachers and peers see who I am beyond just academic results.</p>
             </div>
@@ -213,65 +228,124 @@
 
     <section id="work" style="background-color: var(--white); max-width: 100%; padding-bottom: 100px;">
         <div style="max-width: 1140px; margin: 0 auto;">
-            <h2 class="section-title">Featured Work</h2>
+            <h2 class="section-title">Projects & Passions</h2>
             <p style="text-align: center; color: var(--text-muted); margin: -20px auto 40px auto; font-size: 1.1rem; max-width: 500px;">
-                A curated selection of school projects I am genuinely proud of. Quality over clutter.
+                A curated selection of my school projects and personal hobbies.
             </p>
             
             <div class="grid-layout">
-                <!-- 项目1 卡片 -->
+                <!-- 1: Project 1 -->
                 <div class="premium-card" style="background-color: var(--bg-gray);">
-                    <div class="img-placeholder" style="height: 280px;">[ Image: Robotics & Tech ]</div>
-                    <h3>Biomimetic Robotics</h3>
-                    <p>An ocean-cleaning robot project utilizing computer vision. Blending technology with environmental sustainability.</p>
-                    <!-- 点击触发弹窗 1 -->
+                    <div class="img-container" style="height: 240px;">
+                        <img src="Project1.jpg" alt="Project 1">
+                    </div>
+                    <h3>Academic Project 01</h3>
+                    <p>A showcase of analytical thinking and research effort. Focused on delivering clear, impactful results.</p>
                     <button class="learn-more" onclick="openModal('modal-1')">View Details</button>
                 </div>
                 
-                <!-- 项目2 卡片 -->
+                <!-- 2: Project 2 -->
                 <div class="premium-card" style="background-color: var(--bg-gray);">
-                    <div class="img-placeholder" style="height: 280px; animation-delay: -1.5s;">[ Image: Music Composition ]</div>
-                    <h3>Music Composition</h3>
-                    <p>Analyzing chord progressions and writing original lyrics across R&B and Jazz genres using modern production tools.</p>
-                    <!-- 点击触发弹窗 2 -->
+                    <div class="img-container" style="height: 240px;">
+                        <img src="Project2.jpg" alt="Project 2">
+                    </div>
+                    <h3>Academic Project 02</h3>
+                    <p>Highlighting creativity and execution in my coursework. The focus remains entirely on quality.</p>
                     <button class="learn-more" onclick="openModal('modal-2')">View Details</button>
+                </div>
+
+                <!-- 3: Bicycle -->
+                <div class="premium-card" style="background-color: var(--bg-gray);">
+                    <div class="img-container" style="height: 240px;">
+                        <img src="Bicycle.JPG" alt="Cycling Journey">
+                    </div>
+                    <h3>Urban Cycling</h3>
+                    <p>Exploring the city on two wheels. A passion that brings freedom, focus, and physical energy into my daily routine.</p>
+                    <button class="learn-more" onclick="openModal('modal-3')">View Details</button>
+                </div>
+
+                <!-- 4: 书法 -->
+                <div class="premium-card" style="background-color: var(--bg-gray);">
+                    <div class="img-container" style="height: 240px;">
+                        <img src="书法.jpg" alt="Chinese Calligraphy">
+                    </div>
+                    <h3>Chinese Calligraphy</h3>
+                    <p>Practicing traditional art to stay connected with my roots. It’s a meditative process requiring patience and precision.</p>
+                    <button class="learn-more" onclick="openModal('modal-4')">View Details</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 弹窗结构 1 (隐藏状态) -->
+    <!-- ==========================================
+         弹窗区域 (Modals)
+         ========================================== -->
+         
+    <!-- 弹窗 1 (Project 1) -->
     <div class="modal-overlay" id="modal-1" onclick="closeModal(event, 'modal-1')">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal(event, 'modal-1')">×</button>
-            <span class="modal-tag">Python & OpenCV</span>
-            <h2>Biomimetic Ocean-Cleaning Robot</h2>
-            <div class="img-placeholder" style="height: 200px; margin-bottom: 24px; border-radius: 12px;">[ Detailed Robot Diagram/Code Snippet ]</div>
-            <p>For this project, I explored how technology can solve real-world environmental issues (SDG 14: Life Below Water). I designed a cardboard prototype inspired by the movement of manta rays.</p>
-            <p>Instead of just building the physical structure, I integrated computer vision using Python and YOLOv8 to allow the system to visually track objects. This project taught me how to bridge the gap between mechanical engineering and artificial intelligence.</p>
+            <span class="modal-tag">School Project</span>
+            <h2>Project Overview 01</h2>
+            <div class="img-container" style="height: 250px; margin-bottom: 24px;">
+                <img src="Project1.jpg" alt="Project 1 Details">
+            </div>
+            <p>This project pushed me to think critically and apply theoretical knowledge to a practical format. I focused on building a clean structure and ensuring my core message was communicated effectively.</p>
+            <p>It represents my commitment to academic excellence while maintaining a modern, uncluttered approach to presentation.</p>
         </div>
     </div>
 
-    <!-- 弹窗结构 2 (隐藏状态) -->
+    <!-- 弹窗 2 (Project 2) -->
     <div class="modal-overlay" id="modal-2" onclick="closeModal(event, 'modal-2')">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal(event, 'modal-2')">×</button>
-            <span class="modal-tag">Logic Pro & Arrangement</span>
-            <h2>Music Theory & Composition</h2>
-            <div class="img-placeholder" style="height: 200px; margin-bottom: 24px; border-radius: 12px; animation-delay: -1s;">[ Screenshot of Logic Pro Timeline ]</div>
-            <p>Beyond STEM, music is my creative outlet. In this project, I focused on analyzing complex chord progressions (like 6-4-5-1 structures) and melody arrangements in R&B and Pop music.</p>
-            <p>Using Logic Pro and MIDI instruments, I experimented with producing my own tracks and writing original lyrics in both Chinese and English. It’s a process that balances technical precision with emotional storytelling.</p>
+            <span class="modal-tag">Creative Work</span>
+            <h2>Project Overview 02</h2>
+            <div class="img-container" style="height: 250px; margin-bottom: 24px;">
+                <img src="Project2.jpg" alt="Project 2 Details">
+            </div>
+            <p>In this assignment, I explored the intersection of creativity and logic. By experimenting with different formats, I discovered how visual hierarchy can guide the audience's attention.</p>
+            <p>This experience taught me the value of iterating on feedback and refining raw ideas into a polished final product.</p>
         </div>
     </div>
 
+    <!-- 弹窗 3 (Bicycle) -->
+    <div class="modal-overlay" id="modal-3" onclick="closeModal(event, 'modal-3')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal(event, 'modal-3')">×</button>
+            <span class="modal-tag">Active Lifestyle</span>
+            <h2>My Cycling Journey</h2>
+            <div class="img-container" style="height: 250px; margin-bottom: 24px;">
+                <img src="Bicycle.JPG" alt="Cycling Details">
+            </div>
+            <p>Cycling is more than just a way to get from point A to point B. For me, it represents independence and a way to clear my mind after a long day of studying.</p>
+            <p>Whether I'm navigating the urban streets of Vancouver or riding near the coast, being on a bike gives me a fresh perspective on the city. It’s the perfect balance of physical exercise and mental reset, keeping me grounded and energized for my academic goals.</p>
+        </div>
+    </div>
+
+    <!-- 弹窗 4 (书法) -->
+    <div class="modal-overlay" id="modal-4" onclick="closeModal(event, 'modal-4')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal(event, 'modal-4')">×</button>
+            <span class="modal-tag">Cultural Heritage</span>
+            <h2>The Art of Calligraphy</h2>
+            <div class="img-container" style="height: 250px; margin-bottom: 24px;">
+                <img src="书法.jpg" alt="Calligraphy Details">
+            </div>
+            <p>Practicing Chinese calligraphy (书法) is how I stay deeply connected to my heritage. Moving to a new country and a new school means dealing with a lot of fast-paced changes, but calligraphy grounds me.</p>
+            <p>It is a highly meditative practice. Every stroke requires absolute focus, patience, and control over the brush. It teaches me discipline and reminds me to appreciate the beauty of slowing down in a modern, digital world.</p>
+        </div>
+    </div>
+
+    <!-- 页脚与兴趣标签 -->
     <section id="interests" style="text-align: center; padding-top: 80px;">
         <h2 class="section-title" style="margin-bottom: 10px;">Beyond Academics</h2>
         <p style="color: var(--text-muted); font-size: 1.15rem;">Driven by curiosity and a passion for creating.</p>
         <div class="tags">
-            <span class="tag">Robotics</span>
-            <span class="tag">Music Production</span>
+            <span class="tag">Cycling</span>
+            <span class="tag">Calligraphy</span>
             <span class="tag">Modern Design</span>
-            <span class="tag">Basketball</span>
+            <span class="tag">Technology</span>
         </div>
     </section>
 
@@ -281,15 +355,12 @@
 
     <!-- 控制弹窗的 JavaScript -->
     <script>
-        // 打开弹窗：添加 active 类，并禁止底层页面滚动
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
             document.body.style.overflow = 'hidden'; 
         }
 
-        // 关闭弹窗：移除 active 类，恢复底层滚动
         function closeModal(event, modalId) {
-            // 防止点击弹窗内部时触发关闭（阻止事件冒泡）
             if(event) { event.stopPropagation(); }
             document.getElementById(modalId).classList.remove('active');
             document.body.style.overflow = 'auto';
